@@ -43,3 +43,6 @@ externals
 
 #MAC
 *.DS_Store
+
+# Added
+*.csv#
