@@ -5,6 +5,6 @@
 
 using namespace std;
 
-namespace PolygonalLibrary {
+namespace PolyhedralLibrary {
 	bool test(PolyhedralMesh &mesh);
 }
