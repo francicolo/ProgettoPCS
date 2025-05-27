@@ -25,9 +25,10 @@ struct PolyhedralMesh
 	std::vector<std::vector<unsigned int>> Cell2DsEdges = {};
 	
 	unsigned int NumCell3Ds = 0;
-	std::vector <unsigned int> Cell3DsId = {};
+	unsigned int Cell3DsId = {};
 	std::vector<std::vector<unsigned int>> Cell3DsVertices = {};
 	std::vector<std::vector<unsigned int>> Cell3DsEdges = {};
 	std::vector<std::vector<unsigned int>> Cell3DsFaces = {};
 };
+
 }
