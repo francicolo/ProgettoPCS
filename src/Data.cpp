@@ -1,13 +1,12 @@
 #include "Data.hpp"
-//#include "PolyhedralMesh.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-namespace PolygonalLibrary {
+namespace PolyhedralLibrary {
 
-	bool test(PolygonalMesh &mesh) {
-		mesh.NumCell0Ds = 1;
+	bool test(PolyhedralMesh &mesh) {
+		mesh.NumCell0Ds = 2;
 		if(mesh.NumCell0Ds == 1) {
 			return true;
 		}

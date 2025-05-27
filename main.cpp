@@ -3,12 +3,14 @@
 #include "Data.hpp"
 
 using namespace std;
-using namespace PolygonalLibrary;
+using namespace PolyhedralLibrary;
 
 int main() {
 	cout << "Hello world" << endl;
 
-	if(!test()){
+	PolyhedralMesh mesh;
+
+	if(!test(mesh)){
 		cerr << "Something went wrong..." << endl;
 		return 1;
 	}
