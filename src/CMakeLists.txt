@@ -1,6 +1,3 @@
-list(APPEND PolyhedralMesh_headers ${CMAKE_CURRENT_SOURCE_DIR}/Data.hpp)
-list(APPEND PolyhedralMesh_sources ${CMAKE_CURRENT_SOURCE_DIR}/Data.cpp)
-
 list(APPEND PolyhedralMesh_headers ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh.hpp)
 list(APPEND PolyhedralMesh_sources ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh.cpp)
 
