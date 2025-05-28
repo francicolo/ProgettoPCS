@@ -11,7 +11,7 @@ using namespace Eigen;
 namespace PolyhedralLibrary {
 
 
-void Tetraedro(PolyhedralMesh& pm){
+/*void Tetraedro(PolyhedralMesh& pm){
 
     pm.NumCell0Ds = 4; // numero vertici tetraedro
 	
@@ -173,19 +173,19 @@ void Cubo(PolyhedralMesh& pm){
     //pm.Cell3DsFaces = pm.Cell2DsId
 }
 
-void Ottaedro(PolyhedralMesh &pm){
+/*void Ottaedro(PolyhedralMesh &pm){
 	pm.NumCell0Ds = 6;
-}
+}*/
 
-/*void Ottaedro(PolyhedralMesh& pm){
+void Ottaedro(PolyhedralMesh& pm){
     pm.NumCell0Ds = 6;
 	
 	unsigned int i= 0;
-	
-    for (i = 8; i < 14; i++){
-        pm.Cell0DsId[i-8] = i; // vettore degli id dei vertici
+	pm.Cell0DsId.resize(pm.NumCell0Ds);
+    for (i = 0; i < 6; i++){
+        pm.Cell0DsId[i] = i; // vettore degli id dei vertici
     }
-
+	pm.Cell0DsCoordinates.resize(pm.NumCell0Ds,3);
     pm.Cell0DsCoordinates << 1, 0, 0,
                             -1, 0, 0,
                             0, 1, 0,
@@ -195,11 +195,12 @@ void Ottaedro(PolyhedralMesh &pm){
 
 
     pm.NumCell1Ds = 12; //numero lati ottaedro
-
-    for (i = 0; i < 90; i++){
+	pm.Cell1DsId.resize(pm.NumCell1Ds);
+    for (i = 0; i < 12; i++){
         pm.Cell1DsId[i] = i; // vettore degli id dei lati
     }
-
+	
+	pm.Cell1DsExtrema.resize(pm.NumCell1Ds, 2);
     pm.Cell1DsExtrema << 8, 10,
                         8, 11,
                         8, 12,
@@ -214,60 +215,47 @@ void Ottaedro(PolyhedralMesh &pm){
                         11, 13;
 
     pm.NumCell2Ds = 8; // numero facce ottaedro
-
-    for (i = 10; i < 18; i++){
-        pm.Cell2DsId[i-10] = i; // vettore degli id delle facce
+	
+	pm.Cell2DsId.resize(pm.NumCell2Ds);
+    for (i = 0; i < 8; i++){
+        pm.Cell2DsId[i] = i; // vettore degli id delle facce
     }
+	pm.Cell2DsVertices.resize(pm.NumCell2Ds, 3);
+	
+    pm.Cell2DsVertices <<
+        12, 10, 9,
+        12, 11, 9,
+        12, 11, 8,
+        12, 8, 10,
+        13, 8, 10,
+        13, 10, 9,
+        13, 9, 11,
+        13, 11, 8;
+		
+	pm.Cell2DsEdges.resize(pm.NumCell2Ds, 3);
 
-    pm.Cell2DsVertices = {
-        {12, 10, 9},
-        {12, 11, 9},
-        {12, 11, 8},
-        {12, 8, 10},
-        {13, 8, 10},
-        {13, 10, 9},
-        {13, 9, 11},
-        {13, 11, 8}
-
-    };
-
-    pm.Cell2DsEdges = {
-        {26, 22, 24},
-        {28, 23, 24},
-        {28, 19, 20},
-        {20, 18, 26},
-        {21, 18, 27},
-        {27, 22, 25},
-        {25, 23, 29},
-        {29, 19, 21}
-    };
+    pm.Cell2DsEdges <<
+        26, 22, 24,
+        28, 23, 24,
+        28, 19, 20,
+        20, 18, 26,
+        21, 18, 27,
+        27, 22, 25,
+        25, 23, 29,
+        29, 19, 21;
 
     pm.NumCell3Ds = 1;
 
     pm.Cell3DsId = 2;
 
-
-    //pm.Cell3DsVertices = 
-    //{
-    //    {8, 9, 10, 11, 12, 13},
-    //};
     pm.Cell3DsVertices = pm.Cell0DsId;
 
-    pm.Cell3DsEdges = 
-    {
-        {18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29}
-    };
-    //pm.Cell3DsEdges = pm.Cell1DsId
+    pm.Cell3DsEdges = pm.Cell1DsId;
 
-    pm.Cell3DsFaces = 
-    {
-        {10, 11, 12, 13, 14, 15, 16, 17}
-        
-    };
-    //pm.Cell3DsFaces = pm.Cell2DsId
+    pm.Cell3DsFaces = pm.Cell2DsId;
 
-}*/
-
+}
+/*
 
 void Dodecaedro(PolyhedralMesh& pm){
     pm.NumCell0Ds = 20; // numero vertici dodecaedro
@@ -536,7 +524,7 @@ void Icosaedro(PolyhedralMesh& pm){
     //pm.Cell3DsFaces = pm.Cell2DsId
     
 }
-
+*/
 }
 
 

@@ -21,11 +21,11 @@ struct PolyhedralMesh
 
 	unsigned int NumCell2Ds = 0;
 	std::vector <unsigned int> Cell2DsId = {};
-	std::vector<std::vector<unsigned int>> Cell2DsVertices = {};
-	std::vector<std::vector<unsigned int>> Cell2DsEdges = {};
+	Eigen::MatrixXi Cell2DsVertices = {};
+	Eigen::MatrixXi Cell2DsEdges = {};
 	
 	unsigned int NumCell3Ds = 0;
-	unsigned int Cell3DsId = {};
+	unsigned int Cell3DsId = 0;
 	std::vector<unsigned int> Cell3DsVertices = {};
 	std::vector<unsigned int> Cell3DsEdges = {};
 	std::vector<unsigned int> Cell3DsFaces = {};

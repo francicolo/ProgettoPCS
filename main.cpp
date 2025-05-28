@@ -1,6 +1,5 @@
 #include <iostream>
 #include "PolyhedralMesh.hpp"
-#include "Data.hpp"
 
 using namespace std;
 using namespace PolyhedralLibrary;
@@ -19,7 +18,8 @@ int main() {
 */
 	PolyhedralMesh pm;
 	Ottaedro(pm);
-	cout << pm.NumCell0Ds << endl; 
+	for (unsigned int i=0; i < pm.NumCell0Ds; i++)
+		cout << pm.Cell3DsVertices[i] << endl;
 
 
 
