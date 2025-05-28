@@ -75,15 +75,17 @@ void Tetraedro(PolyhedralMesh& pm){
     pm.Cell3DsFaces = pm.Cell2DsId;
 }
 
-/*
 void Cubo(PolyhedralMesh& pm){
     pm.NumCell0Ds = 8; //numero vertici cubo
 
 	unsigned int i= 0;
 	
+	pm.Cell0DsId.resize(pm.NumCell0Ds);
+	
     for (i = 0; i < 8; i++){
         pm.Cell0DsId[i] = i; // vettore degli id dei vertici
     }
+	pm.Cell0DsCoordinates.resize(pm.NumCell0Ds,3);
     pm.Cell0DsCoordinates << 0,577350269, 0,577350269, 0,577350269,
                             0,577350269, -0,577350269, -0,577350269,
                             -0,577350269, 0,577350269, -0,577350269,
@@ -95,79 +97,65 @@ void Cubo(PolyhedralMesh& pm){
 
                             
     pm.NumCell1Ds = 12; //numero lati cubo
-
-    for (i = 6; i < 18; i++){
-        pm.Cell1DsId[i-6] = i; // vettore degli id dei lati
+	pm.Cell1DsId.resize(pm.NumCell1Ds);
+    for (i = 0; i < 12; i++){
+        pm.Cell1DsId[i] = i; // vettore degli id dei lati
     }
-
+	pm.Cell1DsExtrema.resize(pm.NumCell1Ds, 2);
     pm.Cell1DsExtrema << 0, 4,
-                        0, 5,
-                        0, 6,
-                        1, 4,
-                        1, 5,
-                        1, 7,
-                        2, 4,
-                        2, 6,
-                        2, 7,
-                        3, 5,
-                        3, 6,
-                        3, 7;
+                         0, 5,
+                         0, 6,
+                         1, 4,
+                         1, 5,
+                         1, 7,
+                         2, 4,
+                         2, 6,
+                         2, 7,
+                         3, 5,
+                         3, 6,
+                         3, 7;
                         
 
     pm.NumCell2Ds = 6; // numero facce cubo
-
-    for (i = 4; i < 10; i++){
-        pm.Cell2DsId[i-4] = i; // vettore degli id delle facce
+	pm.Cell2DsId.resize(pm.NumCell2Ds);
+    for (i = 0; i < 6; i++){
+        pm.Cell2DsId[i] = i; // vettore degli id delle facce
     }
+	pm.Cell2DsVertices.resize(pm.NumCell2Ds, 4);
+	
+    pm.Cell2DsVertices << 
+    
+							0, 4, 1, 5,
+							0, 4, 2, 6,
+							0, 6, 3, 5,
+							6, 2, 7, 3,
+							3, 5, 1, 7,
+							2, 7, 1, 4;
+   
+	pm.Cell2DsEdges.resize(pm.NumCell2Ds, 4);
 
-    pm.Cell2DsVertices = 
-    {
-        {0, 4, 1, 5},
-        {0, 4, 2, 6},
-        {0, 6, 3, 5},
-        {6, 2, 7, 3},
-        {3, 5, 1, 7},
-        {2, 7, 1, 4}
-    };
+    pm.Cell2DsEdges << 
+    
+							6, 9, 10, 7,
+							6, 12, 13, 8,
+							8, 16, 15, 7,
+							13, 14, 17, 16,
+							15, 10, 11, 17,
+							14, 11, 9, 12;
 
-    pm.Cell2DsEdges = 
-    {
-        {6, 9, 10, 7},
-        {6, 12, 13, 8},
-        {8, 16, 15, 7},
-        {13, 14, 17, 16},
-        {15, 10, 11, 17},
-        {14, 11, 9, 12}
-
-    };
 
     pm.NumCell3Ds = 1; 
 
     pm.Cell3DsId = 1;
     
 
-    pm.Cell3DsVertices = 
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7}
-    };
-    //pm.Cell3DsVertices = pm.Cell0DsId
+    pm.Cell3DsVertices = pm.Cell0DsId;
 
-    pm.Cell3DsEdges = 
-    {
-        {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}
-    };
-    //pm.Cell3DsEdges = pm.Cell1DsId
+	pm.Cell3DsEdges = pm.Cell1DsId;
 
-    pm.Cell3DsFaces = 
-    {
-        {4, 5, 6, 7, 8, 9}
-    };
-    //pm.Cell3DsFaces = pm.Cell2DsId
+	pm.Cell3DsFaces = pm.Cell2DsId;
+   
 }
-
-/*void Ottaedro(PolyhedralMesh &pm){
-	pm.NumCell0Ds = 6;
-}*/
 
 void Ottaedro(PolyhedralMesh& pm){
     pm.NumCell0Ds = 6;
