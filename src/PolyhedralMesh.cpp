@@ -14,13 +14,13 @@ namespace PolyhedralLibrary {
 void Tetraedro(PolyhedralMesh& pm){
 
     pm.NumCell0Ds = 4; // numero vertici tetraedro
-	pm.Cell0DsId.resize(NumCell0Ds);
-	
+	pm.Cell0DsId.resize(pm.NumCell0Ds);
+	unsigned int i= 0;
     for (i = 0; i < 4; i++){
         pm.Cell0DsId[i] = i; // vettore degli id dei vertici
     }
 	
-	pm.Cell0DsCoordinates.resize(NumCell0Ds,3);
+	pm.Cell0DsCoordinates.resize(pm.NumCell0Ds,3);
     pm.Cell0DsCoordinates << 0,577350269, 0,577350269, 0,577350269,
                             0,577350269, -0,577350269, -0,577350269,
                             -0,577350269, 0,577350269, -0,577350269,
@@ -386,7 +386,7 @@ void Icosaedro(PolyhedralMesh& pm){
     for (i = 0; i < 30; i++){
         pm.Cell1DsId[i] = i; // vettore degli id dei lati
     }
-	pm.Cell1Extrema.resize(pm.NumCell1Ds, 2);
+	pm.Cell1DsExtrema.resize(pm.NumCell1Ds, 2);
     pm.Cell1DsExtrema << 31, 34,
                         31, 29,
                         31, 28,
