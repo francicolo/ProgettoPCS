@@ -11,24 +11,29 @@ using namespace Eigen;
 namespace PolyhedralLibrary {
 
 
-/*void Tetraedro(PolyhedralMesh& pm){
+void Tetraedro(PolyhedralMesh& pm){
 
     pm.NumCell0Ds = 4; // numero vertici tetraedro
+	pm.Cell0DsId.resize(NumCell0Ds);
 	
-	unsigned int i= 0;
     for (i = 0; i < 4; i++){
         pm.Cell0DsId[i] = i; // vettore degli id dei vertici
     }
+	
+	pm.Cell0DsCoordinates.resize(NumCell0Ds,3);
     pm.Cell0DsCoordinates << 0,577350269, 0,577350269, 0,577350269,
                             0,577350269, -0,577350269, -0,577350269,
                             -0,577350269, 0,577350269, -0,577350269,
                             -0,577350269, -0,577350269, 0,577350269;
                             
     pm.NumCell1Ds = 6;
+	pm.Cell1DsId.resize(pm.NumCell1Ds);
 
     for (i = 0; i < 6; i++){
         pm.Cell1DsId[i] = i; // vettore degli id dei lati
     }
+	
+	pm.Cell1DsExtrema.resize(pm.NumCell1Ds, 2);
 
     pm.Cell1DsExtrema << 0, 1,
                         0, 2, 
@@ -43,47 +48,34 @@ namespace PolyhedralLibrary {
     for (i = 0; i < 4; i++){
         pm.Cell2DsId[i] = i; // vettore degli id delle facce
     }
+	pm.Cell2DsVertices.resize(pm.NumCell2Ds, 3);
 
-    pm.Cell2DsVertices = 
-    {
-        {0, 1, 2},
-        {0, 2, 3},
-        {1, 2, 3},
-        {0, 1, 3}
-    };
+    pm.Cell2DsVertices <<
+        0, 1, 2,
+        0, 2, 3,
+        1, 2, 3,
+        0, 1, 3;
+	
+	pm.Cell2DsEdges.resize(pm.NumCell2Ds, 3);
 
-    pm.Cell2DsEdges = 
-    {
-        {0, 1, 3},
-        {1, 2, 5},
-        {3, 4, 5},
-        {0, 2, 4}
-
-    };
+    pm.Cell2DsEdges <<
+        0, 1, 3,
+        1, 2, 5,
+        3, 4, 5,
+        0, 2, 4;
 
     pm.NumCell3Ds = 1; 
 
-    pm.Cell3DsId = 0; // vettore degli id dei poliedri
+    pm.Cell3DsId = 0; // id poliedro
 
-    pm.Cell3DsVertices = 
-    {
-        {0, 1, 2, 3}
-    };
-    //pm.Cell3DsVertices = pm.Cell0DsId
+	pm.Cell3DsVertices = pm.Cell0DsId;
 
-    pm.Cell3DsEdges = 
-    {
-        {0, 1, 2, 3, 4, 5}
-    };
-    //pm.Cell3DsEdges = pm.Cell1DsId
+    pm.Cell3DsEdges = pm.Cell1DsId;
 
-    pm.Cell3DsFaces = 
-    {
-        {0, 1, 2, 3}
-    };
-    //pm.Cell3DsFaces = pm.Cell2DsId
+    pm.Cell3DsFaces = pm.Cell2DsId;
 }
 
+/*
 void Cubo(PolyhedralMesh& pm){
     pm.NumCell0Ds = 8; //numero vertici cubo
 
