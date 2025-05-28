@@ -26,9 +26,11 @@ struct PolyhedralMesh
 	
 	unsigned int NumCell3Ds = 0;
 	unsigned int Cell3DsId = {};
-	std::vector<std::vector<unsigned int>> Cell3DsVertices = {};
-	std::vector<std::vector<unsigned int>> Cell3DsEdges = {};
-	std::vector<std::vector<unsigned int>> Cell3DsFaces = {};
+	std::vector<unsigned int> Cell3DsVertices = {};
+	std::vector<unsigned int> Cell3DsEdges = {};
+	std::vector<unsigned int> Cell3DsFaces = {};
 };
+
+void Ottaedro(PolyhedralMesh& pm);
 
 }
