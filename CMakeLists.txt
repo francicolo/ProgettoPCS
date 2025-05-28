@@ -55,12 +55,6 @@ add_executable(PolyhedralMesh
       ${PolyhedralMesh_SOURCES}
       ${PolyhedralMesh_HEADERS})
 
-
-=======
-#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell0Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell1Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell2Ds.csv
-#      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
-
 target_link_libraries(${PROJECT_NAME} ${PolyhedralMesh_LINKED_LIBRARIES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PolyhedralMesh_INCLUDE})
 target_compile_options(${PROJECT_NAME} PUBLIC -fPIC)
