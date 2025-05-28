@@ -38,9 +38,9 @@ list(APPEND PolyhedralMesh_LINKED_LIBRARIES PRIVATE GTest::gmock_main)
 ################################################################################
 add_subdirectory(src)
 
-list(APPEND PolyhedralMesh_SOURCES ${polygonalMesh_sources})
-list(APPEND PolyhedralMesh_HEADERS ${polygonalMesh_headers})
-list(APPEND PolyhedralMesh_INCLUDE ${polygonalMesh_includes})
+list(APPEND PolyhedralMesh_SOURCES ${PolyhedralMesh_sources})
+list(APPEND PolyhedralMesh_HEADERS ${PolyhedralMesh_headers})
+list(APPEND PolyhedralMesh_INCLUDE ${PolyhedralMesh_includes})
 
 add_subdirectory(ExportParaview)
 
@@ -55,8 +55,8 @@ add_executable(PolyhedralMesh
       ${PolyhedralMesh_SOURCES}
       ${PolyhedralMesh_HEADERS})
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell0Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell1Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell2Ds.csv
-      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell0Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell1Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolyhedralMesh/Cell2Ds.csv
+#      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(${PROJECT_NAME} ${PolyhedralMesh_LINKED_LIBRARIES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PolyhedralMesh_INCLUDE})
