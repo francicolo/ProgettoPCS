@@ -23,14 +23,20 @@ struct PolyhedralMesh
 	std::vector <unsigned int> Cell2DsId = {};
 	Eigen::MatrixXi Cell2DsVertices = {};
 	Eigen::MatrixXi Cell2DsEdges = {};
-	
-	unsigned int NumCell3Ds = 0;
+
 	unsigned int Cell3DsId = 0;
 	std::vector<unsigned int> Cell3DsVertices = {};
 	std::vector<unsigned int> Cell3DsEdges = {};
 	std::vector<unsigned int> Cell3DsFaces = {};
 };
 
+
+// funzioni
+
+void Tetraedro(PolyhedralMesh& pm);
+void Cubo(PolyhedralMesh& pm);
 void Ottaedro(PolyhedralMesh& pm);
+void Dodecaedro(PolyhedralMesh& pm);
+void Icosaedro(PolyhedralMesh& pm);
 
 }
