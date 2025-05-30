@@ -44,5 +44,12 @@ externals
 #MAC
 *.DS_Store
 
-# Added
+# Temporary
+*.swp
+*.swo
+*.swn
+*.tmp
+*~
+
+# Misc
 *.csv#
