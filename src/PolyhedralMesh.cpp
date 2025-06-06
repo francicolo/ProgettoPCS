@@ -65,7 +65,7 @@ void Tetraedro(PolyhedralMesh& pm){
         0, 2, 4;
 
 
-    pm.Cell3DsId = 0; // id poliedro
+    pm.Cell3DsId = 1; // id poliedro
 
 	pm.Cell3DsVertices = pm.Cell0DsId;
 
@@ -143,7 +143,7 @@ void Cubo(PolyhedralMesh& pm){
 							14, 11, 9, 12;
 
 
-    pm.Cell3DsId = 1;
+    pm.Cell3DsId = 2;
     
 
     pm.Cell3DsVertices = pm.Cell0DsId;
@@ -222,7 +222,7 @@ void Ottaedro(PolyhedralMesh& pm){
 							11, 1, 3;
 
 
-    pm.Cell3DsId = 2;
+    pm.Cell3DsId = 3;
 
     pm.Cell3DsVertices = pm.Cell0DsId;
 
@@ -346,7 +346,7 @@ void Dodecaedro(PolyhedralMesh& pm){
 							23, 27, 9, 10, 21;
     
 
-    pm.Cell3DsId = 3; // id ottaedro
+    pm.Cell3DsId = 4; // id ottaedro
 
     pm.Cell3DsVertices = pm.Cell0DsId;
 
@@ -473,7 +473,7 @@ void Icosaedro(PolyhedralMesh& pm){
 						21, 18, 19;
 							   
 
-    pm.Cell3DsId = 4; // id icosaedro
+    pm.Cell3DsId = 5; // id icosaedro
 
     pm.Cell3DsVertices = pm.Cell0DsId;
     
