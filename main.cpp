@@ -26,7 +26,13 @@ int main() {
 	unsigned int q = values[1];
 	unsigned int b = values[2];
 	unsigned int c = values[3];
+
+// per cammino minimo
+	double sum = 0.0; // lunghezza totale cammino minimo
 	optional<unsigned int> id1, id2;
+	vector<int> percorso = {};
+
+
 	if (values.size() == 6) { // Ids salvati solo se aggiunti in input
 		id1 = values[4];
 		id2 = values[5];
@@ -81,6 +87,7 @@ int main() {
 	}
 	else { result = triang; } // Altrimenti, è già dato il solido Geodetico
 
+
 	vector<double> cell1Ds_shortpath(result.NumCell1Ds, 0.0);
 	vector<double> cell0Ds_shortpath(result.NumCell0Ds, 0.0);
 //// Se ci vengono forniti id1 e id2 allora ne calcolo il cammino minimo
@@ -107,9 +114,8 @@ int main() {
 					}
 				}
 			}
-		/// per esportazione
+	/// per esportazione
 			// proprietà shortpath nei vertici
-			//vector<double> cell0Ds_shortpath(result.NumCell0Ds, 0.0);
 				
 				// Aggiungo proprietà ShortPath = 1 ai lati che ne fanno parte
 				if (!percorso.empty()){		
@@ -121,7 +127,6 @@ int main() {
 				}
 
 			// proprietà shortpath nei lati
-			//vector<double> cell1Ds_shortpath(result.NumCell1Ds, 0.0);
 				
 				if (percorso.size() > 1) {
 					for (size_t i = 0; i < percorso.size() - 1; i++) {
@@ -140,7 +145,7 @@ int main() {
 					}
 				}
 
-			cout << "Il cammino minimo dall'vertice con id1 = "<< id1.value() << " a quello con id2 = " << id2.value() << " è composto da " << percorso.size() - 1 << " lati" << endl;
+			cout << "Il cammino minimo dal vertice con id1 = "<< id1.value() << " a quello con id2 = " << id2.value() << " è composto da " << percorso.size() - 1 << " lati" << endl;
 
 			cout << "La lunghezza del cammino minimo è " << sum << endl;
 		}
