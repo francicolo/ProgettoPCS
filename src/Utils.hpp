@@ -26,6 +26,8 @@ namespace PolyhedralLibrary {
 
 	void Duale(const PolyhedralMesh& base, PolyhedralMesh& duale);
 
+	std::vector<int> BFS(PolyhedralMesh& pm, const unsigned int id1, const unsigned int id2);
+
 }
 
 

@@ -81,29 +81,110 @@ int main() {
 	}
 	else { result = triang; } // Altrimenti, è già dato il solido Geodetico
 
-	// Cammino
-	if (id1 && id2) { // Se Ids esistono, fare cammino
-		if (id1 == id2) { cout << "Gli Id dei vertici scelti sono uguali --> Il cammino più corto tra i due è 0" << endl; }
-		else {
-			cout << "Trovo cammino tra i vertici di Id " << *id1 << " e " << *id2 << "..." << endl;
-			//TO CREATE: CamminoVertici()
+	vector<double> cell1Ds_shortpath(result.NumCell1Ds, 0.0);
+	vector<double> cell0Ds_shortpath(result.NumCell0Ds, 0.0);
+//// Se ci vengono forniti id1 e id2 allora ne calcolo il cammino minimo
+	if (id1.has_value() && id2.has_value()) {
+		
+		if (id1.value() >= result.NumCell0Ds || id2.value() >= result.NumCell0Ds) {
+			cout << "I vertici forniti non sono validi.\nInserire vertici compresi tra 0 e " << (result.NumCell0Ds - 1) << endl;
+		}
+		else{
+			cout << "Trovo cammino..." << endl;
+			percorso = BFS(result, id1.value(), id2.value()); // Calcolo il cammino minimo tramite BFS
+
+			for(size_t i = 0; i < percorso.size() - 1; i++){
+				// verifico che i lati del cammino minimo siano presenti nei lati del poliedro
+
+				for(int j = 0; j < result.NumCell1Ds; j++){ // scorro i lati
+					if((result.Cell1DsExtrema(j,0) == percorso[i] && result.Cell1DsExtrema(j,1) == percorso[i+1] ) || // se c'è nella lista dei lati un lato tra i vertici del percorso
+						(result.Cell1DsExtrema(j,1) == percorso[i] && result.Cell1DsExtrema(j,0) == percorso[i+1] )){ // ovvero il lato è nel percorso minimo
+							// prendo le coordinate degli estremi dei lati nel percorso
+							Eigen::Vector3d p1 = result.Cell0DsCoordinates.row(percorso[i]);
+							Eigen::Vector3d p2 = result.Cell0DsCoordinates.row(percorso[i+1]); 
+			
+							sum += (p1-p2).norm(); // sommo la sua lunghezza alla lunghezza totale del percorso minimo
+					}
+				}
+			}
+		/// per esportazione
+			// proprietà shortpath nei vertici
+			//vector<double> cell0Ds_shortpath(result.NumCell0Ds, 0.0);
+				
+				// Aggiungo proprietà ShortPath = 1 ai lati che ne fanno parte
+				if (!percorso.empty()){		
+					for(const auto &idvertice : percorso){
+						if (idvertice < result.NumCell0Ds){ // se il vertice è nel vettore dei vertici percorsi
+							cell0Ds_shortpath.at(idvertice) = 1.0; // gli assegno 1 
+						}
+					}
+				}
+
+			// proprietà shortpath nei lati
+			//vector<double> cell1Ds_shortpath(result.NumCell1Ds, 0.0);
+				
+				if (percorso.size() > 1) {
+					for (size_t i = 0; i < percorso.size() - 1; i++) {
+						int vertice1 = percorso[i];
+						int vertice2 = percorso[i + 1];
+				
+				// Trova il lato che collega vertice1 e vertice2
+						for (int j = 0; j < result.NumCell1Ds; j++) {
+							if ((result.Cell1DsExtrema(j, 0) == vertice1 && result.Cell1DsExtrema(j, 1) == vertice2) || // se c'è un lato tra vertice1 e vertice2
+								(result.Cell1DsExtrema(j, 1) == vertice1 && result.Cell1DsExtrema(j, 0) == vertice2)) { // o tra vertice2 a vertice1
+				
+							// Aggiungo proprietà ShortPath = 1 ai lati che ne fanno parte
+								cell1Ds_shortpath.at(j) = 1.0;
+							}
+						}
+					}
+				}
+
+			cout << "Il cammino minimo dall'vertice con id1 = "<< id1.value() << " a quello con id2 = " << id2.value() << " è composto da " << percorso.size() - 1 << " lati" << endl;
+
+			cout << "La lunghezza del cammino minimo è " << sum << endl;
 		}
 	}
 
-	// Output
+
+
         cout << "Output..." << endl;
-	// Creazione dei file .txt
         ScriviFileTxt(result);
-	// Creazione dei file .inp
+
         Eigen::MatrixXd ptraspo = result.Cell0DsCoordinates.transpose();
-	Eigen::MatrixXi ltraspo = result.Cell1DsExtrema.transpose();
+		Eigen::MatrixXi ltraspo = result.Cell1DsExtrema.transpose();
+	
         Gedim::UCDUtilities utilities;
+
+		// Esportazione dei vertici in Cell0Ds.inp
         {
-                utilities.ExportPoints("./Cell0Ds.inp", ptraspo);
-        }
+			vector<Gedim::UCDProperty<double>> cell0Ds_properties(1);
+
+			cell0Ds_properties[0].Label = "ShortPath";
+			cell0Ds_properties[0].NumComponents = 1;
+	    	cell0Ds_properties[0].Size = result.NumCell0Ds;
+			cell0Ds_properties[0].Data = cell0Ds_shortpath.data();
+			
+			// Esportazione
+			utilities.ExportPoints("./Cell0Ds.inp", ptraspo, cell0Ds_properties);
+		}
+
+
+		// Esportazione dei lati in Cell1Ds.inp
         {
-                utilities.ExportSegments("./Cell1Ds.inp", ptraspo, ltraspo);
-        }
+			vector<Gedim::UCDProperty<double>> cell1Ds_properties(1);
+
+			cell1Ds_properties[0].Label = "ShortPath";
+			cell1Ds_properties[0].NumComponents = 1;
+			cell1Ds_properties[0].Size = result.NumCell1Ds;		
+			cell1Ds_properties[0].Data = cell1Ds_shortpath.data();
+			
+			// Esportazione
+			utilities.ExportSegments("./Cell1Ds.inp", ptraspo, ltraspo, {}, cell1Ds_properties);
+
+		}
+	
+
 
 
 //	---DEBUG---
