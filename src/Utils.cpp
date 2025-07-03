@@ -548,10 +548,10 @@ vector<int> BFS(PolyhedralMesh& pm, const unsigned int id1, const unsigned int i
 		}
 		return percorso; // .. il vettore percorso contiene in ordine i vertici visitati
 	}
-	/*else {
+	else {
 		cout << "Nessun cammino minimo trovato"<< endl; 
 		return {};
-	}*/
+	}
 }
 
 }
