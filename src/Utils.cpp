@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 #include <array>
+#include <queue>
 #include <iomanip>
 #include <sstream>
 #include <iostream>
@@ -492,5 +493,65 @@ void Duale (const PolyhedralMesh& base, PolyhedralMesh& duale) {
 
 }
 
+/// Algoritmo Breadth-First Search
+vector<int> BFS(PolyhedralMesh& pm, const unsigned int id1, const unsigned int id2){
+	if (id1 == id2){
+		vector<int> percorso = {};
+		percorso.push_back(id1);
+		return percorso;
+	}
+
+	// Creo la lista di adiacenza
+	vector<vector<int>> listaAdiacenza(pm.NumCell0Ds);
+	for (int i = 0; i < pm.NumCell1Ds; i++){
+		listaAdiacenza[pm.Cell1DsExtrema(i, 0)].push_back(pm.Cell1DsExtrema(i, 1));
+		listaAdiacenza[pm.Cell1DsExtrema(i, 1)].push_back(pm.Cell1DsExtrema(i, 0));
+	}
+
+	// Algoritmo BFS
+	unsigned int n = pm.NumCell0Ds;
+	vector<bool> reached(n, false); 
+	vector<int> pred(n, -1);
+	queue<int> q;
+
+	q.push(id1);
+	reached[id1] = true;
+	bool trovato = false; // flag falsa finché non trovo id2
+
+	while(!q.empty() && !trovato){
+		int u = q.front();
+		q.pop();
+		
+		for (int w : listaAdiacenza[u] ){
+			if (!reached[w]){ //se il nodo u non è stato raggiunto
+				reached[w] = true;
+				pred[w] = u;
+				q.push(w); // aggiungo i vicino di u alla coda
+				
+				if (w == id2){
+					trovato = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (trovato){
+		vector<int> percorso;
+		cout << "trovato!!"<< endl;
+		int k = id2;
+		while(k != -1) { // ripercorro il cammino al contrario...
+			percorso.insert(percorso.begin(), k); // ... salvando gli id dei vertici percorsi all'inizio del vettore percorso...
+			k = pred[k];
+			/*if (k == id1)
+				break;*/
+		}
+		return percorso; // .. il vettore percorso contiene in ordine i vertici visitati
+	}
+	/*else {
+		cout << "Nessun cammino minimo trovato"<< endl; 
+		return {};
+	}*/
+}
 
 }
