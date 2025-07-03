@@ -17,6 +17,9 @@ namespace PolyhedralLibrary {
 
 	using Triangle = std::array<int, 3>;
 
+	Point Normalizzazione(const Point& p);
+	
+	Point Baricentro(const Point& A, const Point& B, const Point& C, double u, double v, double w);
 
 	void Triangolazione(const PolyhedralMesh& base, int b, PolyhedralMesh& result);
 
