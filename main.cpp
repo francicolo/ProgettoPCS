@@ -69,6 +69,9 @@ int main() {
 			return 2;
 		}
 		cout << "Triangolazione (2)..." << endl; //  TO CREATE: Triangolazione2(mesh, b, result); // Triangolazione per solidi di classe II, solo se b è uguale a c
+		cerr << "ERRORE (triangolazione 2 non finalizzata)\nImpossibile continuare\nExiting..." << endl;
+
+		return 4;
 	}
 	else if	((b == 0) != (c == 0)) {
 		if (max(b, c) == 1) cout << "ATTENZIONE: si richiede di fare la triangolazione con una sola suddivisione, il risultato sarà uguale al solido platonico di base" << endl;
