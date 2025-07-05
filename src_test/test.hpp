@@ -111,3 +111,27 @@ TEST (TestUtils, TestDuale)
 	EXPECT_EQ(dualMesh.NumCell1Ds, E_duale); 
 	EXPECT_EQ(dualMesh.NumCell2Ds, F_duale); 
 }
+
+TEST(TestUtils, TestBFS)
+{
+    PolyhedralMesh mesh;
+
+    mesh.NumCell0Ds = 4;
+
+    mesh.NumCell1Ds = 5;
+    mesh.Cell1DsExtrema = Eigen::MatrixXi(5, 2);
+    mesh.Cell1DsExtrema << 
+        0, 1,
+        1, 2,
+        2, 3,
+        3, 0,
+        0, 2;
+
+    std::vector<int> path = BFS(mesh, 0, 3);
+
+    ASSERT_FALSE(path.empty());
+    EXPECT_EQ(path.front(), 0);
+    EXPECT_EQ(path.back(), 3);
+
+    EXPECT_TRUE(path.size() == 2 || path.size() == 3);
+}
