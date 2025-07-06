@@ -1,8 +1,3 @@
-// File Utils.hpp
-// Definizione di alias
-// Dichiarazione di funzioni per la triangolazione e la scrittura su file .txt
-
-
 #pragma once
 #include "PolyhedralMesh.hpp"
 #include <map>

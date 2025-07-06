@@ -1,7 +1,3 @@
-// File Utils.cpp
-// Funzioni di utilità per la costruzione, normalizzazione e scrittura dei poliedri 
-// Include triangolazione, proiezione su sfera, generazione dei lati e output su file .txt
-
 #include <cmath>
 #include <map>
 #include <vector>
@@ -250,7 +246,7 @@ void ScriviFileTxt(const PolyhedralMesh& pm, const std::string& basepath) {
              << std::setw(L) << pm.Cell1DsExtrema(i, 1) << "\n";  // Stampa una riga per ogni lato con id lato, id vertice origine e id vertice fine
     }
 
-	// Scrittura file Cell2Ds.txt (facce)
+	// Scrittura Cell2Ds.txt (facce)
     std::ofstream out2(basepath + "Cell2Ds.txt");      // Apertura file Cell2Ds.txt
 
     out2 << std::left
@@ -360,7 +356,7 @@ void Duale (const PolyhedralMesh& base, PolyhedralMesh& duale) {
 		int nv = verts.size();
 		for (int j = 0; j < nv; ++j) {
 			int a = verts[j];
-			int b = verts[(j+1) % nv];  // Vedi iPad
+			int b = verts[(j+1) % nv];  
 			auto edge = std::minmax(a, b);    // minmax ordina la coppia per evitare duplicati
 			edgeFaceMap[edge].push_back(f);   // Inserisce la faccia trovata f nel vettore delle facce che usano quel lato
 		}
@@ -409,9 +405,7 @@ void Duale (const PolyhedralMesh& base, PolyhedralMesh& duale) {
 		}
 	}
 
-	/*int maxcols = 0;
-	for (const auto& faccia : facce_duale)
-		maxcols = std::max(maxcols, (int)faccia.size());*/  // trovo quanti vertici ha la faccia più "lunga", cioè il num max di lati nel duale
+	
 
 	duale.Cell3DsId = 0;
 	duale.Cell3DsVertices = duale.Cell0DsId;
